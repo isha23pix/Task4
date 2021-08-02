@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Itim&family=Kaushan+Script&family=Merienda:wght@700&display=swap" rel="stylesheet">
+    <style>
+        body{
+            background-color: mediumvioletred;
+            margin:0;
+        }
+
+        header{
+            margin-right:2rem;
+            margin-left:2rem;
+            margin-bottom:2rem;
+            text-align: center;
+            padding:0.5rem 1rem;
+            background-color: white;
+        }
+
+        .main{
+            margin-top: 2rem;
+            margin-left: 15rem;
+            margin-right: 15rem;
+            margin-bottom: 2rem;
+            text-align: center;
+            padding:0.5rem 1rem;
+            background-color: white;
+        }
+
+        p{
+            font-family: 'Merienda', cursive;
+            color:rgb(0, 0, 0);
+            padding:10xp;
+        }
+
+        h1, h6{
+            font-family: 'Kaushan Script', cursive;
+            color:rgb(0, 0, 0);
+            padding:1rem;
+        }
+        h3,h4{
+            font-family: 'Itim', cursive;
+            color:rgb(0, 0, 0);
+            padding:10xp;
+        }
+
+        form{
+            margin-top: 2rem;
+            background: white;
+            padding:2rem;
+            border-radius: 2rem;
+        }
+        textarea{
+            width: 80%;
+            margin-top: 2rem;
+            background-color:mediumvioletred;
+            border:4xp solid mediumvioletred;
+            padding:0.5rem 1rem;
+            border-radius: 1rem;
+            font-size: 1rem;
+            color:#ffffff;
+        }
+        input{
+            width:50%;
+            margin-top: 2rem;
+            background-color: mediumvioletred;
+            border:2xp solid mediumvioletred;
+            padding:0.5rem 1rem;
+            border-radius: 1rem;
+            font-size: 1rem;
+            color:#ffffff;
+        }
+        input:focus{
+            outline: 0;
+            color:rgb(255, 242, 242);
+        }
+        textarea:focus{
+            outline: 0;
+            color:rgb(255, 242, 242);
+        }
+        input::placeholder{
+            color:#ffffff;
+        }
+        textarea::placeholder{
+            color:#ffffff;
+        }
+        #submit{
+            cursor: pointer;  
+            width: 30%; 
+            margin-top: 2rem;
+            background-color: mediumvioletred;
+            border:2xp solid mediumvioletred;
+            padding:0.5rem 1rem;
+            border-radius: 1rem;
+            font-size: 1rem;
+            color:#ffffff;
+        }
+        footer{
+            margin-top:2rem;
+            margin-left:2rem;
+            margin-right:2rem;
+            text-align: center;
+            padding:0.5rem 1rem;
+            background-color: white;
+        }
+    </style>
+    <title>Email Sender</title>
+</head>
+<body>
+    <header>
+        <h1>SAVEISHA Foundation</h1>
+        <h6>Trying to Bring Smiles on Faces Since 1992</h6>
+    </header>
+    <div class="main">
+        <p>
+            SAVEISHA Foundation organizes the Annual Fundraising Fete every year in order to increase awareness and raise funds for these kids, who have never even stepped into the hallways of a school, lacking not just the money to go to an educational institute but also lacking the infrastructure for a school. During the fete that we organize, all the donations that we receive are used towards buying books and building schools in these places. As of today, our focus regions are areas in rural Indian areas.
+        </p>
+        <p>
+            The Annual Fundraising Fete will be organized this year on the 15th of September. We have already contacted a number of local dealers, malls, and philanthropists to raise funds for the event. Your contribution to the event may go a long way in making this fete a grand success. We would be grateful, if you would agree to engage in our dination in any way. If you want to help us donate please reach out to us, these kids will be grateful to you.
+        </p>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-2"></div>
+            <div class="col-8 aign-self-center">
+                <form>
+                    <h3><strong>Send Us an E-mail</strong></h3>
+                    <input type="email" id="email" placeholder="E-mail"/><br>
+                    <input type="text" id="subject" placeholder="Subject"/>
+                    <textarea name="text" id="text" placeholder="Message" cols="50" rows="20"></textarea>
+                    <input id="submit" type="submit" value="Submit" />
+                </form>
+            </div>
+            <div class="col-2"></div>
+        </div>
+    </div>
+    <footer>
+        <h4>The value of life is not in its duration, but in its donation. You are not important because of how long you live, you are important because of how effective you live.</h4>
+        <p>-Myles Munroe</p>
+    </footer>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script>
+        $('form').on('submit', e =>{
+            e.preventDefault();
+
+            const email=$("#email")
+                .val()
+                .trim();
+            const subject=$("#subject")
+                .val()
+                .trim();
+            const text=$("#text")
+                .val()
+                .trim();
+            const data={
+                email, subject, text
+            };
+            $.post('/email', data)
+                .then(() => {
+                    window.location.href = '/email/sent';
+                })
+                .catch(() => {
+                    window.location.href = '/error';
+                });
+            });
+    </script>
+</body>
+</html>
